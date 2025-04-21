@@ -1,0 +1,99 @@
+package lab6;
+
+import java.util.Scanner;
+import java.time.LocalDate;
+
+public class task_7 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // User Input
+        System.out.print("Enter Software Name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter Version: ");
+        String version = scanner.nextLine();
+
+        System.out.print("Enter License Key: ");
+        String key = scanner.nextLine();
+
+        System.out.print("Enter Expiry Date (YYYY-MM-DD): ");
+        LocalDate expiryDate = LocalDate.parse(scanner.nextLine());
+
+        System.out.print("Enter Storage Limit (GB): ");
+        double storageLimit = scanner.nextDouble();
+
+        System.out.print("Enter Used Storage (GB): ");
+        double usedStorage = scanner.nextDouble();
+
+        CloudSoftware software = new CloudSoftware(name, version, key, expiryDate, storageLimit, usedStorage);
+        software.displayDetails();
+
+        scanner.close();
+    }
+}
+=================================
+package lab6;
+
+
+class Software {
+    protected String softwareName;
+    protected String version;
+    protected String licenseKey;
+
+    public Software(String softwareName, String version, String licenseKey) {
+        this.softwareName = softwareName;
+        this.version = version;
+        this.licenseKey = licenseKey;
+    }
+}
+===============================
+package lab6;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
+class LicensedSoftware extends Software {
+    protected LocalDate expiryDate;
+
+    public LicensedSoftware(String softwareName, String version, String licenseKey, LocalDate expiryDate) {
+        super(softwareName, version, licenseKey);
+        this.expiryDate = expiryDate;
+    }
+
+    public boolean isExpired(LocalDate currentDate) {
+        return expiryDate.isBefore(currentDate);
+    }
+}=============================
+package lab6;
+
+import java.time.LocalDate;
+
+
+class CloudSoftware extends LicensedSoftware {
+    private double storageLimit; // in GB
+
+    private double usedStorage; // in GB
+
+    public CloudSoftware(String softwareName, String version, String licenseKey, LocalDate expiryDate,
+                         double storageLimit, double usedStorage) {
+        super(softwareName, version, licenseKey, expiryDate);
+        this.storageLimit = storageLimit;
+        this.usedStorage = usedStorage;
+    }
+
+    public double remainingStoragePercentage() {
+        return ((storageLimit - usedStorage) / storageLimit) * 100;
+    }
+
+    public void displayDetails() {
+        System.out.println("Software Name: " + softwareName);
+        System.out.println("Version: " + version);
+        System.out.println("License Key: " + licenseKey);
+        System.out.println("Expiry Date: " + expiryDate);
+        System.out.println("License Status: " + (isExpired(LocalDate.now()) ? "Expired" : "Valid"));
+        System.out.println("Storage Limit: " + storageLimit + " GB");
+        System.out.println("Used Storage: " + usedStorage + " GB");
+        System.out.println("Remaining Storage: " + remainingStoragePercentage() + "%");
+    }
+}
