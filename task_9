@@ -1,0 +1,73 @@
+package lab6;
+
+public class bytcorp {
+    int subscription_ID;
+    String customer_name;
+    String plan_type;
+    static int count;
+    final double price;
+
+    bytcorp(int subscription_ID, String customer_name, String plan_type, double price) {
+        this.customer_name = customer_name;
+        this.plan_type = plan_type;
+        this.subscription_ID = subscription_ID;
+        this.price = price;
+        count++;
+    }
+
+    int getCount() {
+        return count;
+    }
+
+    public int getSubscription_ID() {
+        return subscription_ID;
+    }
+
+    String getCustomer_name() {
+        return customer_name;
+
+    }
+
+    String getPlan_type() {
+        return plan_type;
+    }
+
+    void delete_proj() {
+        count--;
+    }
+}==================================
+package lab6;
+
+public class task_9 {
+    public static void main(String [] args){
+
+        bytcorp b1=new bytcorp(123,"Usman","pro",123456);
+        bytcorp b2=new bytcorp(456,"Ibrahim Faisal","Basic",123456);
+        bytcorp b3=new bytcorp(890,"Hasnain","Enterprise",123456);
+
+        System.out.println("Subscription Id:"+b1.getSubscription_ID());
+        System.out.println("Customer name:"+b1.getCustomer_name());
+        System.out.println("plan type:"+b1.getPlan_type());
+        System.out.println("Price:"+b1.price);
+
+
+        System.out.println("Subscription Id:"+b2.getSubscription_ID());
+        System.out.println("Customer name:"+b2.getCustomer_name());
+        System.out.println("plan type:"+b2.getPlan_type());
+        System.out.println("Price:"+b2.price);
+
+        System.out.println("Subscription Id:"+b3.getSubscription_ID());
+        System.out.println("Customer name:"+b3.getCustomer_name());
+        System.out.println("plan type:"+b3.getPlan_type());
+        System.out.println("Price:"+b3.price);
+
+        System.out.println("Project count:"+bytcorp.count);
+        b1.delete_proj();
+
+        System.out.println("Deleting project "+b1.getSubscription_ID());
+        System.out.println("Count :"+bytcorp.count);
+
+
+
+    }
+}
