@@ -1,0 +1,100 @@
+package lab6;
+
+import java.util.*;
+
+public class task_6 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter employee id: ");
+        int id=sc.nextInt();
+        System.out.print("Enter employee name: ");
+        String name=sc.next();
+        System.out.print("Enter employee salary: ");
+        double salary=sc.nextDouble();
+        System.out.print("Enter employee programming language: ");
+        String pl=sc.next();
+        System.out.print("Enter employee projects: ");
+        int pc=sc.nextInt();
+        SoftwareArchitect sa = new SoftwareArchitect(id,name,salary,pl,pc);
+        sa.proficient();
+        sa.eligible();
+    }
+}
+===============================
+package lab6;
+
+public class Employee {
+    private String name;
+    private int id;
+    String department;
+    double salary;
+
+    public Employee(String name, int id, double salary, String department){
+        this.id = id;
+        this.department = department;
+        this.salary = salary;
+        this.name = name;
+    }
+    public Employee(int id,String name, double salary){
+        this.id = id;
+        this.salary = salary;
+        this.name = name;
+    }
+    public Employee(){
+        this.name = "Unknown";
+    }
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void display(){
+        System.out.println("Employee Constructor: " + name + "(ID: " + id + ")");
+    }
+    @Override
+    protected void finalize(){
+        System.out.println("Employee object for " + name + " is being garbage collected.");
+    }
+}
+================================
+package lab6;
+
+public class Developer extends Employee{
+
+    protected String programmingLanguage;
+
+    Developer(int employeeId, String employeeName, double salary, String programmingLanguage) {
+        super(employeeId, employeeName, salary);
+        this.programmingLanguage = programmingLanguage;
+    }
+
+    public void proficient(){
+        if(programmingLanguage.equalsIgnoreCase("Java")){
+            System.out.println("Yes, employee is proficient in java");
+        }else {
+            System.out.println("Yes, employee is not proficient in java");
+        }
+    }
+}=================================
+package lab6;
+
+public class SoftwareArchitect extends Developer{
+    protected int projectCount;
+
+    SoftwareArchitect(int employeeId, String employeeName, double salary, String programmingLanguage, int projectCount) {
+        super(employeeId, employeeName, salary, programmingLanguage);
+        this.projectCount = projectCount;
+    }
+
+    public void eligible(){
+        if(projectCount >= 5){
+            System.out.println("The employee is eligible for leadership role.");
+        }else{
+            System.out.println("The employee is not eligible for leadership role.");
+        }
+    }
+}
