@@ -1,0 +1,78 @@
+package lab6;
+
+
+import java.util.*;
+
+public class task_5 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Employee> employees = new ArrayList<>();
+        int choice=1;
+        while(choice==1){
+            System.out.print("Enter employee id: ");
+            int id=sc.nextInt();
+            System.out.print("Enter employee name: ");
+            String name=sc.next();
+            System.out.print("Enter employee department: ");
+            String depart=sc.next();
+            System.out.print("Enter employee salary: ");
+            float salary=sc.nextFloat();
+            employees.add(new Employee(name,id, salary, depart));
+            System.out.println("Enter 1 to add more employees and 0 to continue");
+            choice=sc.nextInt();
+        }
+
+        float totalSalary=0;
+        float avgSalary;
+        for(Employee e: employees){
+            e.display();
+            totalSalary= (float) (totalSalary+e.salary);
+        }
+        avgSalary=totalSalary/employees.size();
+        System.out.println("The average salary is: "+avgSalary);
+
+        System.out.println("Enter department name to search employees: ");
+        String deptSearch=sc.next();
+        for(Employee e: employees){
+            if(deptSearch.equalsIgnoreCase(e.department)){
+                e.display();
+            }
+        }
+    }
+}
+
+===========================
+package lab6;
+
+public class Employee {
+    private String name;
+    private int id;
+    String department;
+    double salary;
+
+    public Employee(String name, int id, double salary, String department){
+        this.id = id;
+        this.department = department;
+        this.salary = salary;
+        this.name = name;
+    }
+    public Employee(){
+        this.name = "Unknown";
+    }
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void display(){
+        System.out.println("Employee Constructor: " + name + "(ID: " + id + ")");
+    }
+    @Override
+    protected void finalize(){
+        System.out.println("Employee object for " + name + " is being garbage collected.");
+    }
+}
