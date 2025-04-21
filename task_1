@@ -1,0 +1,56 @@
+package lab5;
+
+public class Car {
+    private String brandName, chassisNumber;
+    private int model;
+    private Engine eng;
+
+    Car(String brandName, int model, String chassisNumber, int horsePower, String fuelType, int capacity){
+       this.brandName = brandName;
+       this.model = model;
+       this.chassisNumber = chassisNumber;
+       eng = new Engine(horsePower, fuelType, capacity);
+    }
+    public void display(){
+        System.out.println("Brand: " + brandName);
+        System.out.println("Model: " + model);
+        System.out.println("Chassis: " + chassisNumber);
+        eng.display();
+    }
+}
+======================
+package lab5;
+
+public class Engine {
+    int horsePower;
+    String fuelType;
+    int capacity;
+
+    Engine(int horsePower, String fuelType, int capacity) {
+        this.horsePower = horsePower;
+        this.fuelType = fuelType;
+        this.capacity = capacity;
+    }
+    public void display() {
+        System.out.println("Engine Details:");
+        System.out.println("   Fuel Type: " + fuelType);
+        System.out.println("   Capacity: " + capacity + "cc");
+        System.out.println("   Horse Power: " + horsePower + " HP");
+    }
+}
+=====================
+package lab5;
+
+public class task_6 {
+    public static void main(String[] args) {
+        Car c1 = new Car("Toyota", 2024, "XYZ123", 180, "Petrol", 2000);
+        Car c2 = new Car("Honda", 2023, "ABC456", 150, "Diesel", 1800);
+        Car c3 = new Car("Ford", 2025, "DEF789", 200, "Electric", 0);
+
+        c1.display();
+        System.out.println();
+        c2.display();
+        System.out.println();
+        c3.display();
+    }
+}
