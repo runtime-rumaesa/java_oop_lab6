@@ -1,0 +1,40 @@
+package lab6;
+
+import java.time.LocalDate;
+
+public class task_8 {
+    public static void main(String[] args) {
+        Project p1 = new Project("AI Chatbot", LocalDate.of(2025, 6, 30));
+        Project p2 = new Project("Web Application", LocalDate.of(2025, 9, 15));
+
+        p1.displayProjectDetails();
+        p2.displayProjectDetails();
+
+        Project.displayProjectCount();
+    }
+}
+=====================
+package lab6;
+
+import java.time.LocalDate;
+
+public class Project {
+    private static int projectCount = 0;
+    private final LocalDate deadline;
+    private String projectName;
+
+    public Project(String projectName, LocalDate deadline) {
+        this.projectName = projectName;
+        this.deadline = deadline;
+        projectCount++;
+    }
+
+    public static void displayProjectCount() {
+        System.out.println("Total Projects Created: " + projectCount);
+    }
+
+    public void displayProjectDetails() {
+        System.out.println("Project Name: " + projectName);
+        System.out.println("Deadline: " + deadline);
+    }
+}
